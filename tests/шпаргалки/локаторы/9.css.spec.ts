@@ -32,7 +32,7 @@ test.describe('Динамический контент с условиями', (
   test('Фильтрация динамических элементов', async ({ page }) => {
     // 1. Дождаться появления динамической кнопки, которая:
     //    - Имеет класс disabled
-    //    - Содержит текст "Недоступно"
+    //    - Содержит текст "Недоступно" #dynamic-content .price-value:has-text("9 999"):not([type="featured]')
     //    - Не имеет атрибута type="submit"
     const dynamicButton = page.locator(
       '#dynamic-content .btn.disabled:has-text("Недоступно"):not([type="submit"])',

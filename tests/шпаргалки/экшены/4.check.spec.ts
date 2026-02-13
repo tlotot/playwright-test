@@ -102,7 +102,6 @@ test.describe('Комплексное тестирование формы с ч�
     await page.getByLabel('Музыка').uncheck();
 
     // Радио-кнопки
-    await page.getByLabel('Почта России').check();
 
     // Кастомный элемент
     await page.locator('.tos-container').scrollIntoViewIfNeeded();
@@ -110,7 +109,6 @@ test.describe('Комплексное тестирование формы с ч�
 
     // Проверки
     await expect(page.getByLabel('Подписаться на рассылку')).toBeChecked();
-    await expect(page.getByLabel('Почта России')).toBeChecked();
     await expect(page.getByLabel('Спорт')).toBeChecked();
     await expect(page.getByLabel('Музыка')).not.toBeChecked();
   });

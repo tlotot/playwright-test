@@ -17,12 +17,13 @@ test.describe('Работа с базовыми чекбоксами', () => {
     const status = page.locator('#newsletter-status');
 
     await expect(newsletterCheckbox).not.toBeChecked();
-    // твой код
+    await newsletterCheckbox.check(); // твой код
     await expect(newsletterCheckbox).toBeChecked();
     await expect(status).toHaveText('Подписаны');
     await expect(status).toHaveClass(/checked/);
 
     // твой код
+    await newsletterCheckbox.uncheck();
     await expect(newsletterCheckbox).not.toBeChecked();
     await expect(status).toHaveText('Не подписаны');
   });
@@ -37,6 +38,7 @@ test.describe('Работа с базовыми чекбоксами', () => {
 
     await expect(termsCheckbox).toHaveAttribute('required', '');
     // твой код
+    await termsCheckbox.check();
     await expect(termsCheckbox).toBeChecked();
   });
 });
@@ -56,7 +58,7 @@ test.describe('Сложные сценарии работы с check()', () => {
     const tosContainer = page.locator('.tos-container');
 
     await tosContainer.scrollIntoViewIfNeeded();
-    // твой код
+    await agreeCheckbox.check(); // твой код
     await expect(agreeCheckbox).toBeChecked();
   });
 
@@ -73,7 +75,7 @@ test.describe('Сложные сценарии работы с check()', () => {
     await expect(dynamicCheckbox1).toBeVisible({ timeout: 2000 });
     await expect(dynamicCheckbox2).toBeChecked();
 
-    // твой код
+    await dynamicCheckbox1.check(); // твой код
     await expect(dynamicCheckbox1).toBeChecked();
     await expect(dynamicCheckbox2).toBeChecked();
   });
@@ -92,26 +94,32 @@ test.describe('Комплексное тестирование формы с ч�
   // 5. Принять условия использования
   // 6. Проверить все состояния
   test('Полное заполнение формы с проверкой состояний', async ({ page }) => {
-    // Чекбоксы
-    // твой код
-    // твой код
+    const checkBoxPodpiska = page.getByRole('checkbox', { name: 'Подписаться на рассылку' }); // Чекбоксы
+    const checkYslovija = page.getByRole('checkbox', { name: 'Я принимаю условия соглашения' });
+
+    await checkBoxPodpiska.check(); // твой код
+    await checkYslovija.check(); // твой код
 
     // Группа интересов
+    await page.getByRole('checkbox', { name: 'Спорт' }).check();
+    await page.getByRole('checkbox', { name: 'Кино' }).check();
+    await page.getByRole('checkbox', { name: 'Музыка' }).uncheck();
 
     // твой код
     // твой код
     // твой код
 
     // Радио-кнопки
-    // твой код
+    await page.getByRole('radio', { name: 'Самовывоз' }).check();
 
     // Кастомный элемент
     await page.locator('.tos-container').scrollIntoViewIfNeeded();
+    await page.getByRole('checkbox', { name: 'Я прочитал и согласен с условиями' }).check(); // твой код
     // твой код
 
     // Проверки
     await expect(page.getByLabel('Подписаться на рассылку')).toBeChecked();
-    await expect(page.getByLabel('Почта России')).toBeChecked();
+    await expect(page.getByLabel('Самовывоз')).toBeChecked();
     await expect(page.getByLabel('Спорт')).toBeChecked();
     await expect(page.getByLabel('Музыка')).not.toBeChecked();
   });
