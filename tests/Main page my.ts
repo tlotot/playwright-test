@@ -107,6 +107,7 @@ test('Button Get Started verification', async ({ page }) => {
   await page.goto('https://playwright.dev/');
 
   await expect(page.getByRole('link', { name: 'Get started' })).toContainText('Get started');
+
   await expect(page.getByRole('link', { name: 'Get started' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Get started' })).toHaveAttribute(
     'href',
